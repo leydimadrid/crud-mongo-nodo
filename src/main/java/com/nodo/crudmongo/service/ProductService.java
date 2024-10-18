@@ -28,8 +28,6 @@ public class ProductService {
                 product.getDescription()
         );
         productRepository.save(newProduct);
-
-
     }
 
     public void updateProduct(long productId, Product product) {
