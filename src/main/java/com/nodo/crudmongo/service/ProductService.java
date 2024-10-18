@@ -9,25 +9,44 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class ProductService  {
+@Service //Objeto de tipo servicio
+public class ProductService {
 
-  @Autowired
-  ProductRepository productRepository;
+    @Autowired
+    ProductRepository productRepository;
 
-  public List<Product> getProducts() {
-    return productRepository.findAll();
-  }
 
-  public void createProduct(Product product) {
-    Product newProduct = new Product(
-        product.getId(),
-        product.getTitle(),
-        product.getImgPath(),
-        product.getDescription()
-    );
+    public List<Product> getProducts() {
+        return productRepository.findAll();
+    }
 
-    productRepository.save(newProduct);
+    public void createProduct(Product product) {
+        Product newProduct = new Product(
+                product.getId(),
+                product.getTitle(),
+                product.getImgPath(),
+                product.getDescription()
+        );
+        productRepository.save(newProduct);
 
-  }
+
+    }
+
+    public void updateProduct(long productId, Product product) {
+        Product productt = productRepository.findById(productId).orElse(null);
+        if (productt != null) {
+            productt.setTitle(product.getTitle());
+            productt.setImgPath(product.getImgPath());
+            productt.setDescription(product.getDescription());
+            productRepository.save(productt);
+        }
+
+    }
+
+    public void deleteProduct(long productId) {
+        Product product = productRepository.findById(productId).orElse(null);
+        if (product != null) {
+            productRepository.delete(product);
+        }
+    }
 }

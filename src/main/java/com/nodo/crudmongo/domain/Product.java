@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collation = "product")
+@Document(collection = "product")
 public class Product implements Serializable {
 
   @Id
